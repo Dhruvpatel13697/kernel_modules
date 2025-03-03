@@ -1,0 +1,19 @@
+
+This is basic kernel modules were i am creating different different modules. 
+1: hello.c    (this is sinple hello world progrem)
+2: k_prob.c   (k_prob is use for debug system call.)
+3: sct.c      (in this module we hook kill sys call and replace with newkill)
+
+step 1: install all kernel headers (we can't use user space headers in kernel mode) 
+(headers path => /usr/include)
+
+step 2: make
+
+step 3: sudo insmode file_name.ko    (install module in kernel space)(.ko represent kernel object file)
+step 4: lsmod | grep file_name (list all module     :path => /proc/module) 
+step 5: sudo dmesg    (you can check kernel logs)
+step 6: sudo rmmod file_name  (remove module from kernel space)
+
+
+Note : if secure boot is on in your machine then you need to off secure boot so you can run these 
+       module without signe.
