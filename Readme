@@ -1,19 +1,51 @@
+# Kernel Modules Project
 
-This is basic kernel modules were i am creating different different modules. 
-1: hello.c    (this is sinple hello world progrem)
-2: k_prob.c   (k_prob is use for debug system call.)
-3: sct.c      (in this module we hook kill sys call and replace with newkill)
+This repository contains multiple Linux kernel modules for different functionalities. Below is a brief description of each module:
 
-step 1: install all kernel headers (we can't use user space headers in kernel mode) 
-(headers path => /usr/include)
+## Modules
+1. **hello.c** - A simple "Hello, World!" kernel module.
+2. **k_prob.c** - A kernel probe module used for debugging system calls.
+3. **sct.c** - A module that hooks the `kill` system call and replaces it with `newkill`.
 
-step 2: make
+## Prerequisites
+- Ensure you have installed all required **kernel headers**.
+- Kernel headers path: `/usr/include` (cannot use user-space headers in kernel mode).
 
-step 3: sudo insmode file_name.ko    (install module in kernel space)(.ko represent kernel object file)
-step 4: lsmod | grep file_name (list all module     :path => /proc/module) 
-step 5: sudo dmesg    (you can check kernel logs)
-step 6: sudo rmmod file_name  (remove module from kernel space)
+## Installation Steps
 
+### Step 1: Install Kernel Headers
+```sh
+sudo apt-get install linux-headers-$(uname -r)
+```
 
-Note : if secure boot is on in your machine then you need to off secure boot so you can run these 
-       module without signe.
+### Step 2: Compile the Modules
+```sh
+make
+```
+
+### Step 3: Insert a Module into the Kernel
+```sh
+sudo insmod file_name.ko
+```
+`.ko` files are kernel object files generated after compilation.
+
+### Step 4: Verify Loaded Modules
+```sh
+lsmod | grep file_name
+```
+This lists all loaded modules. The module details can also be found in `/proc/modules`.
+
+### Step 5: Check Kernel Logs
+```sh
+sudo dmesg
+```
+This helps in debugging and verifying module initialization messages.
+
+### Step 6: Remove a Module from the Kernel
+```sh
+sudo rmmod file_name
+```
+
+## Note
+If **Secure Boot** is enabled on your machine, you may need to disable it to run these modules without signing.
+
